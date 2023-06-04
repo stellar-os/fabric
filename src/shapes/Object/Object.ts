@@ -105,6 +105,10 @@ export class FabricObject<
   extends AnimatableObject<EventSpec>
   implements ObjectProps
 {
+  /**
+   * 开始时间
+   */
+  declare startTime: number;
   declare minScaleLimit: number;
 
   declare opacity: number;
@@ -517,6 +521,7 @@ export class FabricObject<
         ...pick(this, propertiesToInclude as (keyof this)[]),
         type: this.constructor.name,
         version: VERSION,
+        startTime: this.startTime,
         originX: this.originX,
         originY: this.originY,
         left: toFixed(this.left, NUM_FRACTION_DIGITS),

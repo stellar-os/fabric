@@ -9,3 +9,4 @@ before_commit
 .idea/
 /dist
 /cli_output/
+/scripts/json/

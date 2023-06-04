@@ -25,6 +25,18 @@ export class Resolution {
      * @default
      */
     declare fps: number;
+
+    /**
+     * 
+     * @returns 转化成JSON对象
+     */
+    toJSON() {
+        return {
+            width: this.width,
+            height: this.height,
+            fps: this.fps
+        };
+    }
 }
 
 /**
@@ -59,9 +71,47 @@ export class Sketchpad {
     declare scenes: JSON[];
 
     /**
-     * 为canvas加载数据
+     * 为scene加载数据
      */
-    loadCanvas(canvas: Canvas, index: number) {
+    loadScene(canvas: Canvas, index: number) {
         canvas.loadFromJSON(this.scenes[index]);
+    }
+
+    /**
+     * 把scene保存到指定位置
+     * 
+     * @param canvas 
+     * @param index 
+     */
+    saveScene(canvas: Canvas, index: number) {
+        this.scenes[index] = canvas.toJSON();
+    }
+
+    /**
+     * 追加一个场景
+     */
+    addScene(canvas: Canvas, index:number){
+        this.scenes.splice(index, 0, canvas.toJSON());
+    }
+
+    /**
+     * 删除一个场景
+     * @param index 
+     */
+    removeScene(index: number) {
+        this.scenes.splice(index, 1);
+    }
+
+    /**
+     * 转化成一个JSON对象
+     */
+    toJSON() {
+        return {
+            id: this.id,
+            title: this.title,
+            version: this.version,
+            resolution: this.resolution.toJSON(),
+            scenes: this.scenes
+        };
     }
 }

@@ -2,6 +2,83 @@
     "id":"success",
     "title":"title",
     "scenes":[
-
+        {
+            "version": "5.2.1",
+            "objects": [
+                {
+                    "type": "rect",
+                    "version": "5.2.1",
+                    "originX": "center",
+                    "originY": "center",
+                    "left": 100,
+                    "top": 100,
+                    "width": 80,
+                    "height": 60,
+                    "fill": "#f55",
+                    "stroke": null,
+                    "strokeWidth": 0,
+                    "strokeDashArray": null,
+                    "strokeLineCap": "butt",
+                    "strokeDashOffset": 0,
+                    "strokeLineJoin": "miter",
+                    "strokeUniform": false,
+                    "strokeMiterLimit": 4,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "angle": 0,
+                    "flipX": false,
+                    "flipY": false,
+                    "opacity": 1,
+                    "shadow": null,
+                    "visible": true,
+                    "backgroundColor": "",
+                    "fillRule": "nonzero",
+                    "paintFirst": "fill",
+                    "globalCompositeOperation": "source-over",
+                    "skewX": 0,
+                    "skewY": 0,
+                    "rx": 0,
+                    "ry": 0
+                }
+            ]
+        },
+        {
+            "version": "5.2.1",
+            "objects": [
+                {
+                    "type": "triangle",
+                    "version": "5.2.1",
+                    "originX": "center",
+                    "originY": "center",
+                    "left": 150,
+                    "top": 130,
+                    "width": 80,
+                    "height": 80,
+                    "fill": "#55f",
+                    "stroke": null,
+                    "strokeWidth": 0,
+                    "strokeDashArray": null,
+                    "strokeLineCap": "butt",
+                    "strokeDashOffset": 0,
+                    "strokeLineJoin": "miter",
+                    "strokeUniform": false,
+                    "strokeMiterLimit": 4,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "angle": 0,
+                    "flipX": false,
+                    "flipY": false,
+                    "opacity": 1,
+                    "shadow": null,
+                    "visible": true,
+                    "backgroundColor": "",
+                    "fillRule": "nonzero",
+                    "paintFirst": "fill",
+                    "globalCompositeOperation": "source-over",
+                    "skewX": 0,
+                    "skewY": 0
+                }
+            ]
+        }
     ]
 }

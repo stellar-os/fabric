@@ -1,5 +1,5 @@
 import { Canvas } from "../fabric";
-
+import { classRegistry } from './ClassRegistry';
 /**
  * 分辨率和fps配置
  */
@@ -70,6 +70,13 @@ export class Sketchpad {
      */
     declare scenes: JSON[];
 
+    constructor(json: string) {
+        console.log("constructor json:" + json);
+        const serialized = typeof json === 'string' ? JSON.parse(json) : json;
+
+        Object.assign(this, serialized);
+    }
+
     /**
      * 为scene加载数据
      */
@@ -110,8 +117,15 @@ export class Sketchpad {
             id: this.id,
             title: this.title,
             version: this.version,
-            resolution: this.resolution.toJSON(),
+            resolution: this.resolution,
             scenes: this.scenes
         };
     }
 }
+
+classRegistry.setClass(Sketchpad);
+classRegistry.setSVGClass(Resolution);
+
+export function newSketchpad(json: string) {
+    return new Sketchpad(json);
+};

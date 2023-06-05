@@ -32,13 +32,19 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="/dist/index.js?t=121188111112"></script>
     <script>
+        //let canvas = new fabric.Canvas('c');
         let vue = new Vue({
             el: '#app',
             data: {
                 visible:false,
-                sketchpad:{}
+                sketchpad:{},
             },
             methods: {
+                created() {
+                    console.log(this.canvas);
+                    this.canvas = new fabric.Canvas("c");
+                    console.log("==============> created");
+                },
                 loadJSON() {
                     axios.get('./test.json?t=' + new Date().getTime())
                     .then(function (response) {
@@ -60,15 +66,18 @@
                 },
                 loadScene(index) {
                     console.log("========>" + index);
-                    var canvas = new fabric.Canvas('c');
                     console.log("========>" + JSON.stringify(vue.sketchpad.scenes[index]));
-                    canvas.loadFromJSON(vue.sketchpad.scenes[index]);
 
-                    // renderAll
-                    canvas.renderAll();
+                    //this.canvas.clear();
+
+                    console.log("========>" + this.canvas);
+                    this.canvas.loadFromJSON(vue.sketchpad.scenes[index]);
+
+                    this.canvas.requestRenderAll();
                 }
             }
-        })
+        });
+        vue.created();
     </script>
     <style>
     .el-header, .el-footer {

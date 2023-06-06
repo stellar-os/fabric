@@ -70,7 +70,7 @@ export class Canvas extends SelectableCanvas {
   /**
    * 持续时间
    */
-  declare duration: null|number;
+  declare duration: number;
 
   /**
    * Contains the id of the touch event that owns the fabric transform

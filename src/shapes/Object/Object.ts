@@ -53,6 +53,7 @@ import type { SerializedObjectProps } from './types/SerializedObjectProps';
 import type { ObjectProps } from './types/ObjectProps';
 import type { TProps } from './types';
 import { getEnv } from '../../env';
+import { FabricObjectEffect } from '../../effects/FabricObjectEffect';
 
 export type TCachedFabricObject = FabricObject &
   Required<
@@ -109,6 +110,22 @@ export class FabricObject<
    * 开始时间
    */
   declare startTime: number;
+
+  /**
+   * 进场动画
+   */
+  declare enterEffect: FabricObjectEffect;
+
+  /**
+   * 停留动画
+   */
+  declare stayEffect: FabricObjectEffect;
+
+  /**
+   * 出场动画
+   */
+  declare exitEffect: FabricObjectEffect;
+  
   declare minScaleLimit: number;
 
   declare opacity: number;
@@ -561,6 +578,9 @@ export class FabricObject<
         skewX: toFixed(this.skewX, NUM_FRACTION_DIGITS),
         skewY: toFixed(this.skewY, NUM_FRACTION_DIGITS),
         ...(clipPathData ? { clipPath: clipPathData } : null),
+        enterEffect: this.enterEffect?this.enterEffect.toJSON():null,
+        stayEffect: this.stayEffect?this.stayEffect.toJSON():null,
+        exitEffect: this.exitEffect?this.exitEffect.toJSON():null
       };
 
     return !this.includeDefaultValues

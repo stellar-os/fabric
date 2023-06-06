@@ -70,6 +70,13 @@ export class Sketchpad {
      */
     declare scenes: JSON[];
 
+    /**
+     * 当前使用的scene
+     * @type String
+     * @default
+     */
+    declare currentIndex: number;
+
     constructor(json: string) {
         console.log("constructor json:" + json);
         const serialized = typeof json === 'string' ? JSON.parse(json) : json;
@@ -80,8 +87,9 @@ export class Sketchpad {
     /**
      * 为scene加载数据
      */
-    loadScene(canvas: Canvas, index: number) {
+    load(canvas: Canvas, index: number) {
         canvas.loadFromJSON(this.scenes[index]);
+        this.currentIndex = index;
     }
 
     /**
@@ -90,14 +98,27 @@ export class Sketchpad {
      * @param canvas 
      * @param index 
      */
-    saveScene(canvas: Canvas, index: number) {
-        this.scenes[index] = canvas.toJSON();
+    save(canvas: Canvas, index: number|undefined) {
+        if(index){
+            console.log("save canvas:" + index);
+            this.scenes[index] = canvas.toJSON();
+        }else{
+            console.log("save canvas currentIndex:" + index);
+            this.scenes[this.currentIndex] = canvas.toJSON();
+        }
     }
 
     /**
      * 追加一个场景
      */
-    addScene(canvas: Canvas, index:number){
+    add(canvas: Canvas){
+        this.scenes.push(canvas.toJSON());
+    }
+
+    /**
+     * 追加一个场景
+     */
+    insertAt(canvas: Canvas, index:number){
         this.scenes.splice(index, 0, canvas.toJSON());
     }
 
@@ -105,7 +126,7 @@ export class Sketchpad {
      * 删除一个场景
      * @param index 
      */
-    removeScene(index: number) {
+    remove(index: number) {
         this.scenes.splice(index, 1);
     }
 

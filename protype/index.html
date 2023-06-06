@@ -29,7 +29,10 @@
 <body>
     <div id="app">
         <el-container>
-        <el-header><el-link type="primary">{{sketchpad.title}}</el-link><el-button @click="loadJSON">Button</el-button></el-header>
+        <el-header><el-link type="primary">{{sketchpad.title}}</el-link>
+          <el-button @click="loadJSON">Button</el-button>
+          <el-button @click="saveJSON">保存</el-button>
+        </el-header>
         <el-container>
           <el-aside width="200px">
             <el-card v-for="(scene, key) in sketchpad.scenes" class="box-card">
@@ -52,9 +55,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- import JavaScript -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="/dist/index.js?t=121188111112"></script>
+    <script src="/dist/index.js?t=12118811111211"></script>
     <script>
-        //let canvas = new fabric.Canvas('c');
         let vue = new Vue({
             el: '#app',
             data: {
@@ -86,15 +88,20 @@
                         console.log(error);
                     });
                 },
+                saveJSON(){
+                  console.log("========>saveJSON:" + this.sketchpad.currentIndex);
+                  this.sketchpad.save(this.canvas, this.sketchpad.currentIndex);
+
+                  console.log("========>" + JSON.stringify(this.sketchpad.toJSON()));
+                },
                 loadScene(index) {
                     console.log("========>" + index);
                     console.log("========>" + JSON.stringify(vue.sketchpad.scenes[index]));
 
-                    //this.canvas.clear();
+                    // 加载第index个场景到canvas
+                    this.sketchpad.load(this.canvas, index);
 
-                    console.log("========>" + this.canvas);
-                    this.canvas.loadFromJSON(vue.sketchpad.scenes[index]);
-
+                    // 请求渲染canvas
                     this.canvas.requestRenderAll();
                 }
             }

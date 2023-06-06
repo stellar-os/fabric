@@ -96,6 +96,12 @@ export const StaticCanvasDefaults = {
 export class StaticCanvas<
   EventSpec extends StaticCanvasEvents = StaticCanvasEvents
 > extends createCollectionMixin(CommonMethods<CanvasEvents>) {
+
+  /**
+   * 持续时间
+   */
+  declare duration: number;
+
   /**
    * Background color of canvas instance.
    * @type {(String|TFiller)}

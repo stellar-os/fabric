@@ -123,9 +123,6 @@ export class Sketchpad {
     }
 }
 
-classRegistry.setClass(Sketchpad);
-classRegistry.setSVGClass(Resolution);
-
 export function newSketchpad(json: string) {
     return new Sketchpad(json);
 };

@@ -38,7 +38,7 @@
     </head>
 <body>
     <div id="app">
-      <div style="padding:0px;height:48px;">
+      <div id="header">
         <el-row style="background-color: #000;height:48px;">
           <el-col :span="12">
             <div style="color:#fff;line-height: 48px;padding-left: 10px;">视频智能设计</div>
@@ -66,6 +66,12 @@
           </el-col>
         </el-row>
       </div>
+      <div id="content">
+        <div id="left">
+          leftxxx
+        </div>
+      </div>
+      <!--
       <el-container id="main">
         <el-container>
           <el-aside>
@@ -78,15 +84,18 @@
           <el-container>
             <el-container>
             <el-main style="text-align: center;">
+              <div style="scroll-behavior:auto;">
               <canvas id="c" width="800" height="400" style="border: 1px solid #ccc"></canvas>
+              </div>
             </el-main>
             <el-aside>right</el-aside>
             </el-container>
             <el-footer>Footer</el-footer>
           </el-container>
         </el-container>
-            <!--<canvas id="c" width="800" height="400" style="border: 1px solid #ccc"></canvas>-->
+            <canvas id="c" width="800" height="400" style="border: 1px solid #ccc"></canvas>
       </el-container>
+    -->
     </div>
     <!-- import Vue before Element -->
     <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
@@ -158,6 +167,31 @@
         vue.created();
     </script>
     <style>
+      #header {
+        position: absolute;
+        top:0px;
+        left:0px;
+        right:0px;
+        width: 100%;
+        padding:0px;
+        height:48px;
+        z-index: 100;
+      }
+      #content {
+        background-color: #bbb;
+        height: auto;
+        top: 48px;
+        bottom: 0px;
+        position: absolute;
+        width: 100%;
+      }
+      #left {
+        position: absolute; 
+        width:356px;
+        background-color: #fff;
+        height:100%;
+        z-index: 101;
+      }
     .el-footer {
       background-color: #B3C0D1;
       color: #333;
@@ -186,20 +220,7 @@
     body{
       overscroll-behavior:none;
     }
-    #app {
-      position: absolute;
-      top:0px;
-      bottom:0px;
-      right:0px;
-      left:0px;
-      width: 100%;
-    }
-    #main {
-      position: absolute;
-      top:48px;
-      bottom:0px;
-      width: 100%;
-    }
+
   </style>
 </body>
 </html>

@@ -118,7 +118,52 @@
             
           </div>
         </div>
-        <div id="right">right</div>
+        <div id="right">
+          <el-tabs>
+            <el-tab-pane label="背景" name="first">
+              <div style="margin:0px 5px;">
+                <el-tabs type="border-card">
+                  <el-tab-pane label="图片/视频">
+                    <div>
+                      <el-row :gutter="4">
+                        <el-col :span="24">
+                          <div id="color_preview" style="width:100%;height:128px;border:1px solid #ccc;">
+                          </div>
+                        </el-col>
+                        <el-col :span="12"><label style="line-height: 33px;">选择颜色:</label></el-col>
+                        <el-col :span="12"></el-col>
+                      </el-row>
+                    </div>
+                  </el-tab-pane>
+                  <el-tab-pane label="颜色">
+                    <div>
+                      <el-row :gutter="4">
+                        <el-col :span="24">
+                          <div id="color_preview" style="width:100%;height:128px;border:1px solid #ccc;">
+                          </div>
+                        </el-col>
+                        <el-col :span="4" v-for="(predefineColor, index) in predefineColors" :key="index"><div class="color_cell" v-bind:style="{ backgroundColor: predefineColor }"></div></el-col>
+
+                        <el-col :span="12"><label style="line-height: 33px;">选择颜色:</label></el-col>
+                        <el-col :span="12">
+                          <el-color-picker
+                          v-model="color"
+                          size="small"
+                          show-alpha
+                          :predefine="predefineColors">
+                        </el-color-picker>
+                      </el-col>
+                      </el-row>
+
+                      
+                    </div>
+                  </el-tab-pane>
+                </el-tabs>
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="图层" name="second">配置管理</el-tab-pane>
+          </el-tabs>
+        </div>
       </div>
     </div>
     <!-- import Vue before Element -->
@@ -133,6 +178,21 @@
             data: {
                 visible:false,
                 sketchpad:{},
+                color: 'rgba(255, 69, 0, 0.68)',
+                predefineColors: [
+                  '#ff4500',
+                  '#ff8c00',
+                  '#ffd700',
+                  '#90ee90',
+                  '#00ced1',
+                  '#1e90ff',
+                  '#c71585',
+                  'rgba(255, 69, 0, 0.68)',
+                  'rgb(255, 120, 0)',
+                  'hsv(51, 100, 98)',
+                  'hsva(120, 40, 94, 0.5)',
+                  '#c7158577'
+                ]
             },
             methods: {
                 created() {
@@ -258,6 +318,18 @@
       .el-menu {
         height: 100%;
         padding-top: 20px;
+      }
+      .el-tabs__nav {
+        width: 100%;
+      }
+      .el-tabs__item {
+        width: 50%;
+        text-align: center;
+      }
+      .color_cell {
+        width: 100%;
+        height:33px;
+        border: 1px solid #ccc;
       }
   </style>
 </body>

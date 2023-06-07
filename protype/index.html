@@ -70,96 +70,28 @@
       </div>
       <div id="content">
         <div id="left">
-          <el-card v-for="(scene, key) in sketchpad.scenes" class="box-card" style="margin:5px;">
+          <div style="width: 100%;">
+            <el-row :gutter="10" style="margin:5px 0px;">
+              <el-col :span="12"><div class="grid-content bg-purple"><el-button style="width:100%;" icon="el-icon-document-add">新建场景</el-button></div></el-col>
+              <el-col :span="12"><div class="grid-content bg-purple-light"><el-button style="width:100%;" icon="el-icon-film">场景库</el-button></div></el-col>
+            </el-row>
+          </div>
+          <el-card v-for="(scene, key) in sketchpad.scenes" class="box-card" style="margin:4px;width:344px;">
             <div slot="header" class="clearfix">
               <span @click="loadScene(key)">场景{{key}}</span>
             </div>
           </el-card>
         </div>
         <div id="main">
-          <div id="editor" style="overflow: auto;padding:10px">
-            <canvas id="c" width="600" height="400" style="border: 1px solid #fff"></canvas>
+          <div id="editor" style="margin: 0 auto;padding: 10px;">
+            <canvas id="c" width="500" height="375" style="border: 1px solid #ccc"/>
           </div>
           <div id="timeline" style="overflow: auto;">
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
-            timeline main<br/>
+            
           </div>
         </div>
         <div id="right">right</div>
       </div>
-      <!--
-      <el-container id="main">
-        <el-container>
-          <el-aside>
-            <el-card v-for="(scene, key) in sketchpad.scenes" class="box-card">
-              <div slot="header" class="clearfix">
-                <span @click="loadScene(key)">场景{{key}}</span>
-              </div>
-            </el-card>
-          </el-aside>
-          <el-container>
-            <el-container>
-            <el-main style="text-align: center;">
-              <div style="scroll-behavior:auto;">
-              <canvas id="c" width="800" height="400" style="border: 1px solid #ccc"></canvas>
-              </div>
-            </el-main>
-            <el-aside>right</el-aside>
-            </el-container>
-            <el-footer>Footer</el-footer>
-          </el-container>
-        </el-container>
-            <canvas id="c" width="800" height="400" style="border: 1px solid #ccc"></canvas>
-      </el-container>
-    -->
     </div>
     <!-- import Vue before Element -->
     <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
@@ -211,7 +143,7 @@
                     console.log("========>" + JSON.stringify(vue.sketchpad.scenes[index]));
 
                     //设置canvas大小
-                    this.canvas.setDimensions({width:this.sketchpad.resolution.width + index*10, height:this.sketchpad.resolution.height + index*10});
+                    //this.canvas.setDimensions({width:this.sketchpad.resolution.width + index*10, height:this.sketchpad.resolution.height + index*10});
 
                     // 加载第index个场景到canvas
                     this.sketchpad.load(this.canvas, index);
@@ -232,7 +164,7 @@
     </script>
     <style>
       #header {
-        position: absolute;
+        position: fixed;
         top:0px;
         left:0px;
         right:0px;
@@ -242,7 +174,7 @@
         z-index: 100;
       }
       #content {
-        background-color: #bbb;
+        background-color: #eee;
         height: auto;
         top: 48px;
         bottom: 0px;
@@ -250,15 +182,16 @@
         width: 100%;
       }
       #left {
-        position: absolute; 
-        width:356px;
+        position: fixed; 
+        width:355px;
         background-color: #fff;
         height:100%;
         z-index: 101;
+        border-right: solid 1px #ccc;
+        overflow: auto;
       }
       #main {
         position: relative; 
-        background-color: red;
         margin-left: 356px;
         margin-right: 260px;
         width: auto;
@@ -266,27 +199,32 @@
       }
       #right {
         position: absolute; 
-        background-color: green;
+        background-color: #fff;
         right: 0px;
         top:0px;
         width: 260px;
         height: 100%;
+        border-left: solid 1px #ccc;
       }
       #editor {
-        background-color: #ccc;
+        background-color: #eee;
         height: auto;
         top: 0px;
         bottom: 0px;
         margin-bottom: 280px;
-        position: absolute;
+        position: relative;
         width: 100%;
       }
       #timeline {
         position: absolute;
         bottom: 0px; 
-        background-color: yellow;
+        background-color: #eee;
         width: 100%;
         height: 278px;
+        border-top: solid 1px #ccc;
+      }
+      .canvas-container {
+        margin: 0 auto;
       }
   </style>
 </body>

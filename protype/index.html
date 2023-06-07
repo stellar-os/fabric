@@ -71,16 +71,44 @@
       <div id="content">
         <div id="left">
           <div style="width: 100%;">
-            <el-row :gutter="10" style="margin:5px 0px;">
-              <el-col :span="12"><div class="grid-content bg-purple"><el-button style="width:100%;" icon="el-icon-document-add">新建场景</el-button></div></el-col>
-              <el-col :span="12"><div class="grid-content bg-purple-light"><el-button style="width:100%;" icon="el-icon-film">场景库</el-button></div></el-col>
-            </el-row>
-          </div>
-          <el-card v-for="(scene, key) in sketchpad.scenes" class="box-card" style="margin:4px;width:344px;">
-            <div slot="header" class="clearfix">
-              <span @click="loadScene(key)">场景{{key}}</span>
+            <div style="width: 64px;float:left;height:100%;">
+              <el-menu default-active="1" :collapse="true">
+                <el-menu-item index="1">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">场景</span>
+                </el-menu-item>
+                <el-menu-item index="2">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">导航二</span>
+                </el-menu-item>
+                <el-menu-item index="3">
+                  <i class="el-icon-document"></i>
+                  <span slot="title">导航三</span>
+                </el-menu-item>
+                <el-menu-item index="4">
+                  <i class="el-icon-setting"></i>
+                  <span slot="title">导航四</span>
+                </el-menu-item>
+              </el-menu>
             </div>
-          </el-card>
+            <div style="width: 291px;margin-left:64px;overflow: auto;">
+              <el-row :gutter="10" style="margin:5px 0px;">
+                <el-col :span="12"><div class="grid-content bg-purple"><el-button type="primary" style="width:100%;" icon="el-icon-document-add">新建场景</el-button></div></el-col>
+                <el-col :span="12"><div class="grid-content bg-purple-light"><el-button style="width:100%;" icon="el-icon-film">场景库</el-button></div></el-col>
+              </el-row>
+              <div style="overflow: auto;margin-top:45px;top:0px;position: absolute;bottom: 0px;padding-bottom: 45px;">
+                <el-row :gutter="10" style="margin:5px 0px;">
+                  <el-col :span="24" v-for="(scene, key) in sketchpad.scenes" :key="key">
+                    <el-card class="box-card" style="margin:0px;width:278px;">
+                      <div slot="header" class="clearfix">
+                        <span @click="loadScene(key)">场景{{key}}</span>
+                      </div>
+                    </el-card>
+                  </el-col>
+                </el-row>
+            </div>
+            </div>
+          </div>
         </div>
         <div id="main">
           <div id="editor" style="margin: 0 auto;padding: 10px;">
@@ -108,9 +136,7 @@
             },
             methods: {
                 created() {
-                    console.log(this.canvas);
                     this.canvas = new fabric.Canvas("c");
-                    console.log("==============> created");
                     this.loadJSON();
                 },
                 loadJSON() {
@@ -188,7 +214,7 @@
         height:100%;
         z-index: 101;
         border-right: solid 1px #ccc;
-        overflow: auto;
+        overflow: none;
       }
       #main {
         position: relative; 
@@ -225,6 +251,13 @@
       }
       .canvas-container {
         margin: 0 auto;
+      }
+      .el-col {
+        margin-bottom: 4px;
+      }
+      .el-menu {
+        height: 100%;
+        padding-top: 20px;
       }
   </style>
 </body>

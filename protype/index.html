@@ -29,8 +29,7 @@
 <body>
     <div id="app">
         <el-container>
-        <el-header><el-link type="primary">{{sketchpad.title}}</el-link>
-          <el-button @click="loadJSON">Button</el-button>
+        <el-header>
           <el-button @click="saveJSON">保存</el-button>
         </el-header>
         <el-container>
@@ -43,7 +42,7 @@
           </el-aside>
           <el-container>
             <el-main>
-                <canvas id="c" width="400" height="400" style="border:1px solid #ccc"></canvas>
+                <canvas id="c" width="800" height="400" style="border: 1px solid #ccc"></canvas>
             </el-main>
             <el-footer>Footer</el-footer>
           </el-container>
@@ -68,6 +67,7 @@
                     console.log(this.canvas);
                     this.canvas = new fabric.Canvas("c");
                     console.log("==============> created");
+                    this.loadJSON();
                 },
                 loadJSON() {
                     axios.get('./test.json?t=' + new Date().getTime())
@@ -98,8 +98,14 @@
                     console.log("========>" + index);
                     console.log("========>" + JSON.stringify(vue.sketchpad.scenes[index]));
 
+                    //设置canvas大小
+                    this.canvas.setDimensions({width:this.sketchpad.resolution.width + index*10, height:this.sketchpad.resolution.height + index*10});
+
                     // 加载第index个场景到canvas
                     this.sketchpad.load(this.canvas, index);
+
+                    // 设置
+                    this.canvas.backgroundColor='#fff';
 
                     // 请求渲染canvas
                     this.canvas.requestRenderAll();

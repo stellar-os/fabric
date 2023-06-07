@@ -70,60 +70,15 @@
       </div>
       <div id="content">
         <div id="left">
-          leftxxx
+          <el-card v-for="(scene, key) in sketchpad.scenes" class="box-card" style="margin:5px;">
+            <div slot="header" class="clearfix">
+              <span @click="loadScene(key)">场景{{key}}</span>
+            </div>
+          </el-card>
         </div>
         <div id="main">
-          <div id="editor" style="overflow: auto;">
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
-              auto main<br/>
+          <div id="editor" style="overflow: auto;padding:10px">
+            <canvas id="c" width="600" height="400" style="border: 1px solid #fff"></canvas>
           </div>
           <div id="timeline" style="overflow: auto;">
             timeline main
@@ -318,7 +273,7 @@
         height: 100%;
       }
       #editor {
-        background-color: #bbb;
+        background-color: #ccc;
         height: auto;
         top: 0px;
         bottom: 0px;

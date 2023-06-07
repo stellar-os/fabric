@@ -70,6 +70,10 @@
         <div id="left">
           leftxxx
         </div>
+        <div id="main">
+          <div>auto main</div>
+          <div id="right">right</div>
+        </div>
       </div>
       <!--
       <el-container id="main">
@@ -192,35 +196,21 @@
         height:100%;
         z-index: 101;
       }
-    .el-footer {
-      background-color: #B3C0D1;
-      color: #333;
-      text-align: center;
-      height: 278px !important;
-    }
-    
-    .el-aside {
-      background-color: green;
-      color: #333;
-      text-align: center;
-      line-height: 200px;
-    }
-    
-    .el-main {
-      background-color: #ddd;
-      color: #333;
-      text-align: center;
-      line-height: 160px;
-      scroll-behavior: auto;
-    }
-    
-    body > .el-container {
-      margin-bottom: 40px;
-    }
-    body{
-      overscroll-behavior:none;
-    }
-
+      #main {
+        position: relative; 
+        background-color: red;
+        margin-left: 356px;
+        width: auto;
+        height: 100%;
+      }
+      #right {
+        position: absolute; 
+        background-color: green;
+        right: 0px;
+        top:0px;
+        width: 260px;
+        height: 100%;
+      }
   </style>
 </body>
 </html>

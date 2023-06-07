@@ -24,14 +24,46 @@
           .box-card {
             width: 180px;
           }
+          body {
+            margin: 0px;
+          }
+          .el-dropdown-link {
+            cursor: pointer;
+            color: #fff;
+          }
+          .el-icon-arrow-down {
+            font-size: 12px;
+          }
         </style>
     </head>
 <body>
     <div id="app">
-        <el-container>
-        <el-header>
-          <el-button @click="saveJSON">保存</el-button>
-        </el-header>
+      <el-row style="background-color: #000;height:48px;">
+        <el-col :span="12">
+          <div>xxx</div>
+        </el-col>
+        <el-col :span="12">
+          <div style="width:100%;">
+            <div style="float:right;">
+              <el-button type="primary" icon="el-icon-video-play" size="small">预览</el-button>
+              <el-button type="info" @click="saveJSON" icon="el-icon-upload" size="small">保存</el-button>
+              <el-button type="success" icon="el-icon-share" size="small">分享</el-button>
+              <el-dropdown style="line-height: 48px;" size="small">
+                <span class="el-dropdown-link">
+                  我的<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>黄金糕</el-dropdown-item>
+                  <el-dropdown-item>狮子头</el-dropdown-item>
+                  <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                  <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+                  <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
         <el-container>
           <el-aside width="200px">
             <el-card v-for="(scene, key) in sketchpad.scenes" class="box-card">
@@ -47,7 +79,6 @@
             <el-footer>Footer</el-footer>
           </el-container>
         </el-container>
-      </el-container>
     </div>
     <!-- import Vue before Element -->
     <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
@@ -103,6 +134,10 @@
 
                     // 加载第index个场景到canvas
                     this.sketchpad.load(this.canvas, index);
+
+                    this.canvas.on("selection:created", function(e){
+                        console.log("selection:created -------> " + JSON.stringify(e));
+                    });
 
                     // 设置
                     this.canvas.backgroundColor='#fff';

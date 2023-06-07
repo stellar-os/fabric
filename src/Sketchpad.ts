@@ -90,6 +90,10 @@ export class Sketchpad {
     load(canvas: Canvas, index: number) {
         canvas.loadFromJSON(this.scenes[index]);
         this.currentIndex = index;
+
+        canvas.on("selection:created", function(e){
+            console.log("selection:created -------> " + e);
+        });
     }
 
     /**

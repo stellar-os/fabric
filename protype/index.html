@@ -113,7 +113,7 @@
           </div>
         </div>
         <div id="right">
-          <el-tabs>
+          <el-tabs v-model="activeTabName">
             <el-tab-pane label="背景" name="first">
               <div style="margin:0px 5px;">
                 <el-tabs type="border-card">
@@ -177,8 +177,6 @@
                         </el-color-picker>
                       </el-col>
                       </el-row>
-
-                      
                     </div>
                   </el-tab-pane>
                 </el-tabs>
@@ -196,7 +194,7 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="/dist/index.js?t=12118811111211"></script>
     <script>
-        let vue = new Vue({
+        let that = new Vue({
             el: '#app',
             data: {
                 visible:false,
@@ -205,6 +203,7 @@
                 dialogImageUrl: '',
                 dialogVisible: false,
                 disabled: false,
+                activeTabName: 'first',
                 predefineColors: [
                   '#ff4500',
                   '#ff8c00',
@@ -238,7 +237,9 @@
                         var sketchpad = new fabric.newSketchpad(data);
 
                         console.log("======> " + JSON.stringify(sketchpad));
-                        vue.sketchpad = sketchpad;
+                        that.sketchpad = sketchpad;
+
+                        that.loadScene(0);
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -252,7 +253,7 @@
                 },
                 loadScene(index) {
                     console.log("========>" + index);
-                    console.log("========>" + JSON.stringify(vue.sketchpad.scenes[index]));
+                    console.log("========>" + JSON.stringify(that.sketchpad.scenes[index]));
 
                     //设置canvas大小
                     //this.canvas.setDimensions({width:this.sketchpad.resolution.width + index*10, height:this.sketchpad.resolution.height + index*10});
@@ -264,6 +265,11 @@
                         console.log("selection:created -------> " + JSON.stringify(e));
                     });
 
+                    this.canvas.on("selection:cleared", function(e){
+                      console.log("selection:cleared -------> " + JSON.stringify(e));
+                      that.activeTabName = 'first';
+                    });
+
                     // 设置
                     this.canvas.backgroundColor='#fff';
 
@@ -272,7 +278,7 @@
                 }
             }
         });
-        vue.created();
+        that.created();
     </script>
     <style>
       #header {

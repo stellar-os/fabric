@@ -10,3 +10,4 @@ before_commit
 /dist
 /cli_output/
 /scripts/json/
+protype/mp4/

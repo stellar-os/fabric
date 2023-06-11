@@ -4,6 +4,7 @@
     "scenes":[
         {
             "version": "5.2.1",
+            "background":"#00ff00",
             "objects": [
                 {
                     "type": "rect",
@@ -44,6 +45,7 @@
         },
         {
             "version": "5.2.1",
+            "background":"#ff0000",
             "objects": [
                 {
                     "type": "triangle",

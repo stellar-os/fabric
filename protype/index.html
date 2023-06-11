@@ -192,7 +192,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- import JavaScript -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="/dist/index.js?t=12118811111211"></script>
+    <script src="/dist/index.js?t=12109"></script>
     <script>
         let that = new Vue({
             el: '#app',
@@ -228,15 +228,11 @@
                     axios.get('./test.json?t=' + new Date().getTime())
                     .then(function (response) {
                         data = JSON.parse(JSON.stringify(response.data));
-                        console.log("======> " + JSON.stringify(data));
 
                         var point = new fabric.Point(0, 10);
 
-                        console.log("======> " + JSON.stringify(point));
-
                         var sketchpad = new fabric.newSketchpad(data);
 
-                        console.log("======> " + JSON.stringify(sketchpad));
                         that.sketchpad = sketchpad;
 
                         that.loadScene(0);
@@ -246,15 +242,9 @@
                     });
                 },
                 saveJSON(){
-                  console.log("========>saveJSON:" + this.sketchpad.currentIndex);
                   this.sketchpad.save(this.canvas, this.sketchpad.currentIndex);
-
-                  console.log("========>" + JSON.stringify(this.sketchpad.toJSON()));
                 },
                 loadScene(index) {
-                    console.log("========>" + index);
-                    console.log("========>" + JSON.stringify(that.sketchpad.scenes[index]));
-
                     //设置canvas大小
                     //this.canvas.setDimensions({width:this.sketchpad.resolution.width + index*10, height:this.sketchpad.resolution.height + index*10});
 
@@ -262,19 +252,19 @@
                     this.sketchpad.load(this.canvas, index);
 
                     this.canvas.on("selection:created", function(e){
-                        console.log("selection:created -------> " + JSON.stringify(e));
                     });
 
                     this.canvas.on("selection:cleared", function(e){
-                      console.log("selection:cleared -------> " + JSON.stringify(e));
                       that.activeTabName = 'first';
                     });
 
                     // 设置
-                    this.canvas.backgroundColor='#fff';
+                    this.canvas.backgroundColor= '#ff0000';
+                    console.log("this.canvas.backgroundColor -------> " + this.canvas.backgroundColor);
 
                     // 请求渲染canvas
                     this.canvas.requestRenderAll();
+                    console.log("this.canvas -------> " + JSON.stringify(this.canvas.toJSON()));
                 }
             }
         });

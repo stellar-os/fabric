@@ -1,0 +1,46 @@
+<style>
+    #progress {
+        background: #000a;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        display: grid;
+        place-items: center;
+        color: #FFF;
+        font-size: 3em;
+        display: none;
+    }
+</style>
+
+<canvas id="canvas" width="1080" height="720" style="border: 1px solid #ccc;"></canvas>
+<br />
+<button id="recordButton" onclick="javascript:startRecording();">Record</button>
+<button id="stopButton" onclick="javascript:stopRecording();">Stop</button>
+<script>
+    window.$ = document.querySelector.bind(document);
+    let canvas = $("canvas");
+    let encodeWorker=null;
+
+    async function startRecording() {
+        fileHandle = await window.showSaveFilePicker({
+          startIn: 'videos',
+          suggestedName: 'myVideo.webm',
+          types: [{
+            description: 'Video File',
+            accept: {'video/webm' :['.webm']}
+            }],
+        });
+
+        encodeWorker = new Worker('./js/canvas-record.js');
+
+        const offscreenCanvas = canvas.transferControlToOffscreen();
+        encodeWorker.postMessage({ type: 'start', fileHandle:fileHandle, canvas: offscreenCanvas, trackSettings:{width: canvas.width, height: canvas.height}}, {transfer: [offscreenCanvas]});
+    }
+
+    function stopRecording() {
+      encodeWorker.postMessage({ type: 'stop'});
+      return ;
+    }
+</script>
